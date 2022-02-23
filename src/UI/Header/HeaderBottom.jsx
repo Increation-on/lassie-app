@@ -18,19 +18,18 @@ const HeaderBottom = () => {
     ]
 
     const [hover, setHover] = useState(false);
-
     
 
     return (
-        <div className={`${styles.header__bottom}`}>
+        <div className={styles.header__bottom}>
             <div className={styles.container}>
                 <nav className={`${styles.header__nav} ${styles.navigation}`}>
                     <ul className={`${styles.header__menu} ${styles.menu} ${styles.menu_width_full}`}>
                         {menuItems.map((el) => {
                             return (
-                                <li onMouseOver={()=>setHover(true)} className={styles.menu__item} key={el.title}>
+                                <li onMouseOver={()=>{setHover(true)}} onMouseOut={()=>{setHover(false)}} className={styles.menu__item} key={el.title}>
                                     <a href="#" className={styles.menu__name}>{el.title}</a>
-                                   {hover?<HeaderDropdownMenu />:null}
+                                   {hover?<HeaderDropdownMenu/>:null}
                                 </li>
                             )
                         })}

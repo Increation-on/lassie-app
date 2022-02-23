@@ -5,7 +5,6 @@ import MainPagePopular from './MainPagePopular';
 const MainConteiner = () => {
     return (
         <main className={`${styles.content} ${styles.index}`}>
-            Main
             <MainPageSlider />
             <MainPagePopular />
         </main>

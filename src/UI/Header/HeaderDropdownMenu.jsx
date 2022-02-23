@@ -1,10 +1,13 @@
 import styles from '../styles/Header.module.css';
+import { useState } from 'react';
 
 const HeaderDropdownMenu = (props) => {
 
+    const [show, setShow] = useState(true);
+    
     return (
-        <ul className={styles.dropdown_menu}>
-            <li  className={styles.dropdown_menu__content}>
+        <ul className={show?styles.dropdown_menu:styles.dropdown_menu_hidden}>
+            <li className={styles.dropdown_menu__content}>
                 <div className={styles.dropdown_menu__img}>
                     <img src={require('../../images/header-submenu-1.jpg')} alt="child" />
                 </div>

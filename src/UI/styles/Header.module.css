@@ -346,6 +346,10 @@ ul {
     text-decoration: none;
 }
 
+.menu_width_full .menu__item:hover {
+    background-color: #009a5c;
+}
+
 .dropdown_menu {
     position: absolute;
     left: 0;
