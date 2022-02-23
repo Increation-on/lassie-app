@@ -178,8 +178,8 @@ textarea {
 }
 
 .form__error_hide::before {
-    -webkit-transform: translate(-50%,-50%) rotate(-45deg);
-    transform: translate(-50%,-50%) rotate(-45deg);
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .form__error_hide::after {
@@ -193,4 +193,23 @@ textarea {
 
 .label_valid {
     color: green;
+}
+
+.form__col_width_260 {
+    flex-basis: 260px;
+}
+
+.form__info {
+    font-size: .75rem;
+    line-height: 2;
+    color: #959595;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }

@@ -2,6 +2,7 @@ import styles from '../styles/Order.module.css';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import OrderPageFormRow from './OrderPageFormRow';
 
 const OrderPageContent = () => {
 
@@ -15,48 +16,98 @@ const OrderPageContent = () => {
         reset,
         watch
     } = useForm({
-        mode: 'onChange'
+        mode: 'onBlur'
     });
 
+    const onFormSubmit = (data) => {
+        console.log(JSON.stringify(data));
+    }
+
     const [toggleErr, setToggleErr] = useState(true);
-    
+
 
     return (
         <div className={styles.container}>
             <ul className={styles.breadcrumbs}>
                 <li className={styles.breadcrumbs__item}>
-                    <Link to='/main' class={styles.breadcrumbs__name}>Главная</Link>
+                    <Link to='/main' className={styles.breadcrumbs__name}>Главная</Link>
                 </li>
                 <li className={styles.breadcrumbs__item}>
-                    <a href="#" class={styles.breadcrumbs__name}>Аксессуары</a>
+                    <a href="#" className={styles.breadcrumbs__name}>Аксессуары</a>
                 </li>
                 <li className={styles.breadcrumbs__item}>
-                    <a href="#" class={styles.breadcrumbs__name}>Головные уборы</a>
+                    <a href="#" className={styles.breadcrumbs__name}>Головные уборы</a>
                 </li>
             </ul>
             <h1 className={styles.title}>Оформление заказа</h1>
-            <form onSubmit={handleSubmit} className={`${styles.form} ${styles.form_validate} ${styles.order_page__form}`}>
+            <form onSubmit={handleSubmit(onFormSubmit)} className={`${styles.form} ${styles.form_validate} ${styles.order_page__form}`}>
                 <fieldset className={styles.form__fieldset}>
                     <legend className={styles.form__title}>Информация о покупателе</legend>
-                    <div className={styles.form__row}>
-                        <div className={`${styles.form__col} ${styles.form__col_width_220}`}>
-                            <label className={`${styles.form__label} ${errors.order_name? styles.label_invalid : styles.form__label}`} htmlFor="order_name">Фамилия, Имя, Отчество</label>
-                        </div>
-                        <div className={`${styles.form__col} ${styles.form__col_width_375}`}>
-                            <input className={`${styles.input} ${errors.order_name ? styles.invalid : styles.input} `} type="text"
-                                {...register('order_name', {
-                                    required: "Пожалуйста, заполните это поле",
-                                })}
-                            />
-                            {errors.order_name && toggleErr?<div className={styles.form__error_wrapper}>
-                                <label class={`${styles.form__error} ${styles.form__label_invalid}`} htmlFor="order_name">
-                                    Пожайлуйста, заполните это поле
-                                </label>
-                                <span onClick={()=>setToggleErr(false)} className={styles.form__error_hide}></span>
-                            </div>: null}
-                            
-                        </div>
+                    {/* rework input size!!! */}
+
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_375}`}
+                        htmlForName='order_name'
+                        type='text'
+                        text='Фамилия, Имя, отчество'
+                    />
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_email'
+                        text="Электронная почта"
+                        type='email'
+                        patternValue={/([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/}
+                        patternMessage="Пожалуйста, введите корректный адрес электронной почты"
+                    />
+                    <div className={styles.form__col}>
+                        <div className={styles.form__info}>Мы не рассылаем спам и не передаем информацию третьим лицам</div>
                     </div>
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_phone'
+                        text="Контактный телефон"
+                        type='tel'
+                        patternMessage="Пожалуйста, введите корректный номер телефона"
+                    />
+                    <div className={styles.form__col}>
+                        <div className={styles.form__info}>Необходим для подтверждения заказа</div>
+                    </div>
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_town'
+                        text="Город"
+                        type='text'
+                    />
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_street'
+                        text="Улица"
+                        type='text'
+                    />
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_mail_index'
+                        text="Почтовый индекс"
+                        type='number'
+                    />
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_home_number'
+                        text="Номер дома"
+                        type='number'
+                    />
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_frame'
+                        text="Корпус"
+                        type='number'
+                    />
+                    <OrderPageFormRow
+                        formClass={`${styles.form__col} ${styles.form__col_width_220}`}
+                        htmlForName='order_frame'
+                        text="Номер квартиры"
+                        type='number'
+                    />
                 </fieldset>
             </form>
         </div>
